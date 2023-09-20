@@ -5,6 +5,44 @@ date: "2023-09-17"
 output: github_document
 ---
 
+Problem 1
+
+Load the moderndive library. 
+```{r, message = FALSE}
+library("moderndive")
+library("tidyverse")
+```
+
+Load the early_january_weather dataset.
+```{r}
+data("early_january_weather")
+view(early_january_weather)
+```
+
+```{r}
+nrow(early_january_weather)
+ncol(early_january_weather)
+```
+
+```{r}
+mean(early_january_weather$temp)
+```
+
+Make a scatterplot of temp (y) vs time_hour (x); color points using the humid variable.
+
+Export your scatterplot to your project directory using ggsave.
+```{r}
+ggplot(early_january_weather, mapping = aes(x = time_hour, y = temp, color = humid)) + geom_point()
+
+
+
+```
+Export your scatterplot to your project directory using ggsave.
+```{r}
+ggsave("p8105_hw1_yw4199_scatter_plot.pdf", height = 4, width = 6)
+```
+
+Problem 2
 ```{r}
 
 ```
