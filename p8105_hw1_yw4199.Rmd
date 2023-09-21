@@ -7,45 +7,48 @@ output: github_document
 
 #Problem 1
 
-Load the moderndive library.
-
 ```{r, message = FALSE}
-library("moderndive")
-library("tidyverse")
-```
-
-Load the early_january_weather dataset.
-
-```{r}
-data("early_january_weather")
-view(early_january_weather)
+library("moderndive") #Load the moderndive library.
+library("tidyverse") #Load tidyverse library. 
 ```
 
 ```{r}
-nrow(early_january_weather)
-ncol(early_january_weather)
+data("early_january_weather") #Load the early_january_weather dataset.
+view(early_january_weather) #View the early_january_weather dataset.
 ```
+
+Description of the dataset: 
+This set is a part from the weather data frame from nycflights13. This is the hourly meterological data for LGA, JFK and EWR in January 2013. This data contains 358 rows and 15 columns. This dataset includes origins(character), year(integer), month(integer), day(integer), hour(integer), temperature(numeric), dewpoint in F(numeric), relative humidity(numeric), wind direction (in degrees)(numeric), speed(numeric), gust speed (in mph)(numeric), precipitation, in inches(numeric), sea level pressure in millibars(numeric), visibility in miles(numeric), date and hour of the recording as a POSIXct date. The mean temperature is 39.58212 in F. 
 
 ```{r}
-mean(early_january_weather$temp)
+?early_january_weather #accessing the dataset help file
+nrow(early_january_weather) #number of rows 
+ncol(early_january_weather) #number of columns
+str(early_january_weather) #assess variable types
+mean(early_january_weather$temp) #the mean temperature
 ```
 
-Make a scatterplot of temp (y) vs time_hour (x); color points using the humid variable.
-
-Export your scatterplot to your project directory using ggsave.
 
 ```{r}
-ggplot(early_january_weather, mapping = aes(x = time_hour, y = temp, color = humid)) + geom_point()
-
-
+plot = ggplot(early_january_weather, mapping = aes(x = time_hour, y = temp, color = humid))+
+      geom_point()+
+      labs(x = "Time Hour",
+            y = "Temperature",
+            title = "Scatterplot of Temperature and Time Hour",
+            subtitle = "Colored by Humidity"
+            )
+plot
+#Make a scatterplot of temp (y) vs time_hour (x); color points using the humid variable.
 
 ```
 
-Export your scatterplot to your project directory using ggsave.
 
 ```{r}
 ggsave("p8105_hw1_yw4199_scatter_plot.pdf", height = 4, width = 6)
+#Export your scatterplot to your project directory using ggsave.
 ```
+
+Describe patterns that are apparent in this plot.
 
 #Problem 2
 
@@ -82,5 +85,13 @@ Write a code chunk that applies the as.numeric function to the logical, characte
 norm_samp_pos_num = as.numeric(normal_df$norm_samp_pos) #convert logical variable to numeric
 vector_num = as.numeric(normal_df$vector) #convert vector to numeric
 factor_num = as.numeric(normal_df$factor) #convert factor to numeric
+
+#generate mean for all the converted variables
+mean(norm_samp_pos_num) 
+mean(vector_num)
+mean(factor_num)
 ```
+The norm_samp_pos_num generates 1s, and it seems no meaning corresponds to its original values, and its mean is 1 which is not meaningful. 
+The vector_num generates all NAs, and its mean is NA. 
+The factor_num generates a series of numbers corresponding to the values of their original vector, and its mean is 2.1. 
 
