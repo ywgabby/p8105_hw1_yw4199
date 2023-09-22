@@ -17,14 +17,16 @@ data("early_january_weather") #Load the early_january_weather dataset.
 view(early_january_weather) #View the early_january_weather dataset.
 ```
 
-Description of the dataset: 
-This set is a part from the weather data frame from nycflights13. This is the hourly meterological data for LGA, JFK and EWR in January 2013. This data contains 358 rows and 15 columns. This dataset includes origins(character), year(integer), month(integer), day(integer), hour(integer), temperature(numeric), dewpoint in F(numeric), relative humidity(numeric), wind direction (in degrees)(numeric), speed(numeric), gust speed (in mph)(numeric), precipitation, in inches(numeric), sea level pressure in millibars(numeric), visibility in miles(numeric), date and hour of the recording as a POSIXct date. The mean temperature is 39.58212 in F. 
+Description of the dataset:
+This dataset is a subset of the weather data frame from the 'nycflights13' package.
+It contains hourly meteorological data for LGA, JFK, and EWR airports in January 2013.
+The dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
+The columns in this dataset include: `r names(early_january_weather)`, with the structure of `r str(early_january_weather)`. The mean temperature in this dataset is `r mean(early_january_weather$temp)`°F.
 
 ```{r}
 ?early_january_weather #accessing the dataset help file
 nrow(early_january_weather) #number of rows 
 ncol(early_january_weather) #number of columns
-str(early_january_weather) #assess variable types
 mean(early_january_weather$temp) #the mean temperature
 ```
 
@@ -81,7 +83,7 @@ For the first numeric variable, it returns 0.8553194 this time; and for the seco
 
 Write a code chunk that applies the as.numeric function to the logical, character, and factor variables. 
 
-```{r, message = FALSE}
+```{r, echo = FALSE}
 norm_samp_pos_num = as.numeric(normal_df$norm_samp_pos) #convert logical variable to numeric
 character_num = as.numeric(normal_df$character) #convert character to numeric
 factor_num = as.numeric(normal_df$factor) #convert factor to numeric
